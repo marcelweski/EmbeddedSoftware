@@ -1,18 +1,22 @@
 /**
+ * 
+ */
+
+/**
  * Internal error counting function for assertXXX methods.
  * @param msg to report
  */
-extern void cunit report error(const char* msg);
-extern void cunit report failure(const char* msg);
+extern void cunit_report_error(const char* msg);
+extern void cunit_report_failure(const char* msg);
 
 /**
  * raise a failure situation with message.
  */
 #define fail(msg) { \
-  char test buf[BUFSIZE]; \
-  sprintf ( test buf ,”FAIL %s:%d %s \n”, \
-    FILE , LINE , msg); \
-  cunit report failure ( test buf ); \
+  char test_buf[BUFSIZE]; \
+  sprintf(test_buf, ”FAIL %s:%d %s\n”, \
+    FILE, LINE, msg); \
+  cunit_report_failure(test_buf); \
 }
 
 /**
@@ -20,9 +24,9 @@ extern void cunit report failure(const char* msg);
  */
 #define assertTrue(expr) { \
   if( !( expr) ) { \
-    char test buf[BUFSIZE]; \
-    sprintf ( test buf ,”ERROR %s:%d %s \n”, \
-      FILE , LINE , #expr); \
-    cunit report error ( test buf ); \
+    char test_buf[BUFSIZE]; \
+    sprintf(test_buf, ”ERROR %s:%d %s\n”, \
+      FILE, LINE, #expr); \
+    cunit_report_error(test_buf); \
   } \
 }
