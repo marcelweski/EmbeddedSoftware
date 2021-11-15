@@ -1,6 +1,13 @@
 /**
- * 
+ * declare test function header
  */
+#define DECLARE_TEST(testname) \
+extern int testname##Test(int argc, char** argv);
+
+/**
+ *
+ */
+#define BEG_SUITE(suitename)
 
 /**
  * Internal error counting function for assertXXX methods.
