@@ -1,13 +1,36 @@
 /**
- * declare test function header
+ * declare a test function
  */
-#define DECLARE_TEST(testname) \
-extern int testname##Test(int argc, char** argv);
+#define DECLARE_TEST(test) \
+extern int test##Test(int argc, char** argv);
 
 /**
- *
+ * begin a test suite
  */
-#define BEG_SUITE(suitename)
+#define BEG_SUITE(suite) \
+int (*)(int, char**) suite##_testfuncs[] = {
+
+/**
+ * add test to the suite
+ */
+#define ADD_TEST(test) \
+  test##Test,
+
+/**
+ * end the suite
+ */
+#define END_SUITE(suite) \
+};
+
+/**
+ * run the created test suite
+ */
+#define RUN_SUITE(suite) \
+int main(int argc, char** argv) { \
+  int test_count = sizeof(suite##_testfuncs) / sizeof(void*); \
+  for (int i = 0; i < test_count; i++) { \
+  } \
+}
 
 /**
  * Internal error counting function for assertXXX methods.
